@@ -2,26 +2,28 @@
 from django.core.management.base import BaseCommand
 from clinic.models import MedStaffModel
 
+
 class Command(BaseCommand):
-    '''Команда для добавления медицинских работников'''
+    """Команда для добавления медицинских работников"""
+
     def handle(self, *args, **options):
         MedStaffModel.objects.all().delete()
 
         staff = [
             {
-                'name': 'Васютин Александр Анатольевич',
-                'title': 'Врач',
-                'speciality': 'рентгенолог'
+                "name": "Васютин Александр Анатольевич",
+                "title": "Врач",
+                "speciality": "рентгенолог",
             },
             {
-                'name': 'Селезнев Александр Виторович',
-                'title': 'Врач',
-                'speciality': 'онколог'
+                "name": "Селезнев Александр Виторович",
+                "title": "Врач",
+                "speciality": "онколог",
             },
             {
-                'name': 'Бандурина Вера Александровна',
-                'title': 'Медсестра',
-            }
+                "name": "Бандурина Вера Александровна",
+                "title": "Медсестра",
+            },
         ]
 
         for staff_data in staff:
@@ -29,7 +31,7 @@ class Command(BaseCommand):
 
             if created:
                 self.stdout.write(
-                    self.style.SUCCESS(f'Добавлен {staff.title}: {staff.name}.')
+                    self.style.SUCCESS(f"Добавлен {staff.title}: {staff.name}.")
                 )
             else:
                 self.stdout.write(
