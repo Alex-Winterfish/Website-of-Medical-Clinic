@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from django.db import models
 
 
@@ -42,7 +43,7 @@ class MedStaffModel(models.Model):
         choices=TITLE_IN_CHOICES, verbose_name="медицинская должность"
     )
     speciality = models.CharField(
-        choices=SPECIALITY_IN_CHOICES, verbose_name="специальность"
+        choices=SPECIALITY_IN_CHOICES, verbose_name="специальность", blank=True
     )
 
     def __str__(self):

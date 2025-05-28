@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from rest_framework import serializers
 
 from users.models import CustomUser
@@ -9,9 +10,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = [
-            "email",
-            "username",
-            "password",
+            'last_name',
+            'first_name',
+            'patronymic',
             "country",
+            'email',
             "phone",
         ]

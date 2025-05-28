@@ -1,10 +1,13 @@
+# -*- coding: UTF-8 -*-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 class CustomUser(AbstractUser):
     """Модель пользователя model: users.CustomUser"""
-
+    last_name = models.CharField(max_length=200, verbose_name='Фамилия', help_text='введите фамилию', blank=True)
+    first_name = models.CharField(max_length=100, verbose_name='Имя', help_text='введите имя', blank=True)
+    patronymic = models.CharField(max_length=100, verbose_name='Отчество', help_text='введите отчество (при наличии)', blank=True)
     email = models.EmailField(unique=True, verbose_name="Email")
     phone = models.CharField(
         max_length=35,
