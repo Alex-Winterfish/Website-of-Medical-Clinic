@@ -68,7 +68,7 @@ class AppointmentModel(models.Model):
     '''Модель запись на медицинскую услугу model:clinic.models.AppointmentModel.'''
 
     ap_date = models.DateTimeField(verbose_name='дата и время оказания медицинской услуги.')
-    med_spec = models.ForeignKey('clinic.MedStaffModel', on_delete=models.SET_NULL, verbose_name='назначенный медицинский специалист')
+    med_spec = models.ForeignKey('clinic.MedStaffModel', on_delete=models.SET_NULL, null=True, verbose_name='назначенный медицинский специалист')
     med_serv = models.ForeignKey('clinic.MedServiceModel', on_delete=models.CASCADE, verbose_name='медицинская услуга')
     patient = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='пациент')
 
@@ -83,8 +83,9 @@ class AppointmentModel(models.Model):
 class ResultModel(models.Model):
     '''Модель результат диагностики model:clinic.models.ResultModel.'''
     result_date = models.DateField(verbose_name='дата результата медуслуги')
-    appointment = models.ForeignKey('clinic.AppointmentModel', on_delete=models.SET_NULL)
+    appointment = models.ForeignKey('clinic.AppointmentModel', on_delete=models.SET_NULL, null=True, verbose_name='назнечение на процедуру')
     result = models.TextField(max_length=5000, verbose_name='эпикриз по результатам медицинской процедуры')
+    patient = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='пациент')
 
     def __str__(self):
         return f'Результаты процедуры от {self.result_date}.'
