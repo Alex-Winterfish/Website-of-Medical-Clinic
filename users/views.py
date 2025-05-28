@@ -3,10 +3,13 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from users import models
 from users import serializers
+
+
 class CustomUserViewSet(viewsets.ModelViewSet):
-    '''ViewSet для model:users.models.CustomUser'''
+    """ViewSet для model:users.models.CustomUser"""
+
     queryset = models.CustomUser.objects.all()
-    serializer_class = models.CustomUserSerializer
+    serializer_class = serializers.CustomUserSerializer
 
     def get_permissions(self):
         if self.action == "create":
