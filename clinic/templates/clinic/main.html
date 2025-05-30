@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'clinic/base.html' %}
 
-</body>
-</html>
+{% block title %}Компания медицинской диагностики{% endblock %}
+
+{% block content %}
+<ul class="dropdown-menu">
+  <li><h6 class="dropdown-header">Dropdown header</h6></li>
+  <li><a class="dropdown-item" href="#">Action</a></li>
+  <li><a class="dropdown-item" href="#">Another action</a></li>
+</ul>
+{% endblock %}
