@@ -1,54 +1,34 @@
-from rest_framework import generics, permissions
+from django.views import generic
 from clinic import models
-from clinic import serializers
 
 
 # Контроллеры для CRUD операций model:clinic.models.MedStaffModel.
-class StaffListView(generics.ListAPIView):
+class StaffListView(generic.ListView):
     """Контроллер для вывода списка сущностей models: clinic.model.MedStaffModel."""
 
-    queryset = models.MedStaffModel.objects.all()
-    serializer_class = serializers.StaffSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedStaffModel
+    template_name = 'clinic/company_page.html'
 
 
-class StaffCreateView(generics.CreateAPIView):
+
+class StaffCreateView(generic.CreateView):
     """Контроллер для cсоздания сощности models: clinic.model.MedStaffModel."""
 
-    queryset = models.MedStaffModel.objects.all()
-    serializer_class = serializers.StaffSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedStaffModel
 
 
-class StaffUpdateView(generics.UpdateAPIView):
+class StaffUpdateView(generic.UpdateView):
     """Контроллер для изменения сущности models: clinic.model.MedStaffModel."""
 
-    queryset = models.MedStaffModel.objects.all()
-    serializer_class = serializers.StaffSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedStaffModel
 
-
-class StaffRetrieveView(generics.RetrieveAPIView):
+class StaffDetailView(generic.DetailView):
     """Контроллер для получения сущности models: clinic.model.MedStaffModel."""
 
-    queryset = models.MedStaffModel.objects.all()
-    serializer_class = serializers.StaffSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedStaffModel
 
 
-class StaffDestroyView(generics.DestroyAPIView):
+class StaffDeleteView(generic.DeleteView):
     """Контроллер для удаления models: clinic.model.MedStaffModel."""
 
-    queryset = models.MedStaffModel.objects.all()
-    serializer_class = serializers.StaffSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedStaffModel

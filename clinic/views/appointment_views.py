@@ -1,53 +1,31 @@
-from rest_framework import generics, permissions
+from django.views import generic
 from clinic import models
-from clinic import serializers
 # Контроллеры для model:clinic.models.AppointmentModel.
 
 
-class AppointmentListView(generics.ListAPIView):
+class AppointmentListView(generic.ListView):
     """Контроллер для получения списка model:clinic.models.AppointmentModel."""
 
-    queryset = models.AppointmentModel.objects.all()
-    serializer_class = serializers.AppointmentSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.AppointmentModel
 
-class AppointmentCreateView(generics.CreateAPIView):
+class AppointmentCreateView(generic.CreateView):
     """Контроллер для создания экземпляра model:clinic.models.AppointmentModel."""
 
-    queryset = models.AppointmentModel.objects.all()
-    serializer_class = serializers.AppointmentSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.AppointmentModel
 
 
-class AppointmentRetrieveView(generics.RetrieveAPIView):
+class AppointmentDetailView(generic.DetailView):
     """Контроллер для получения экземпляра model:clinic.models.AppointmentModel."""
 
-    queryset = models.AppointmentModel
-    serializer_class = serializers.AppointmentSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.AppointmentModel
 
 
-class AppointmentUpdateView(generics.UpdateAPIView):
+class AppointmentUpdateView(generic.UpdateView):
     """Контроллер для изменения экземпляра model:clinic.model.AppointmentModel."""
-
-    queryset = models.AppointmentModel.objects.all()
-    serializer_class = serializers.AppointmentSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.AppointmentModel
 
 
-class AppointmentDestroyView(generics.DestroyAPIView):
+class AppointmentDeleteView(generic.DeleteView):
     """Контроллер для удаления экземпляра model:clinic.models.AppointmentModel."""
 
-    queryset = models.AppointmentModel.objects.all()
-    serializer_class = serializers.AppointmentSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.AppointmentModel

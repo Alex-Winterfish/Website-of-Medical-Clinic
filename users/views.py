@@ -1,38 +1,33 @@
-# -*- coding: UTF-8 -*-
-from rest_framework import viewsets, permissions
-from rest_framework_simplejwt.views import TokenObtainPairView
+# -*- coding: utf-8 -*-
+from django.contrib.auth import login
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
+#from .forms import CustomUserCreationForm
+from django.core.mail import send_mail
+import os
+from dotenv import load_dotenv
 
-from users import models
-from users import serializers
+load_dotenv()
 
+class RegisterView(CreateView):
+    template_name = "users/register.html"
+    #form_class = CustomUserCreationForm
+    success_url = reverse_lazy("catalog:product_list")
 
-class CustomUserViewSet(viewsets.ModelViewSet):
-    """ViewSet для model:users.models.CustomUser"""
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        self.send_welcome_email(user.email)
+        return super().form_valid(form)
 
-    queryset = models.CustomUser.objects.all()
-    serializer_class = serializers.CustomUserSerializer
+    def send_welcome_email(self, user_email):
+        subject = "Добро пожаловать в наш сервис"
+        message = "Спасибо, что зарегистрировались в нашем сервисе!"
+        from_email = os.getenv("EMAIL_HOST_USER")
+        recipient_list = [user_email]
+        send_mail(subject, message, from_email, recipient_list)
 
-    def get_permissions(self):
-        if self.action == "create":
-            self.permission_classes = [permissions.AllowAny]
-        return super().get_permissions()
-
-    def perform_create(self, serializer):
-        user = serializer.save(is_active=True)
-        user.set_password(user.password)
-        user.save()
-
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    """Аутентификация пользователя"""
-
-    permission_classes = (permissions.AllowAny,)
-
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        token["username"] = user.username
-        token["email"] = user.email
-
-        return token
+    def form_invalid(self, form):
+        print(form.errors)  # Вывод ошибок в консоль
+        return render(self.request, self.template_name, {'form': form})

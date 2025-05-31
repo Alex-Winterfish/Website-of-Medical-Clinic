@@ -1,55 +1,32 @@
-from rest_framework import generics, permissions
+from django.views import generic
 from clinic import models
-from clinic import serializers
 
 # Контроллеры для CRUD операций model:clinic.models.MedServiceModel.
 
 
-class ServiceListView(generics.ListAPIView):
+class ServiceListView(generic.ListView):
     """Контроллер для вывода списка model:clinic.models.MedServiceModel."""
-
-    queryset = models.MedServiceModel.objects.all()
-    serializer_class = serializers.ServiceSerailizer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedServiceModel
+    template_name = 'clinic/company_page.html'
 
 
-class ServiceCreateView(generics.CreateAPIView):
+
+class ServiceCreateView(generic.CreateView):
     """Контроллер для создания model:clinic.models.MedServiceModel."""
-
-    queryset = models.MedServiceModel.objects.all()
-    serializer_class = serializers.ServiceSerailizer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedServiceModel
 
 
-class ServiceRetrieveView(generics.RetrieveAPIView):
+
+class ServiceDetailView(generic.DetailView):
+    """Контроллер для получения model:clinic.models.MedServiceModel."""
+    model = models.MedServiceModel
+
+class ServiceUpdateView(generic.UpdateView):
     """Контроллер для получения model:clinic.models.MedServiceModel."""
 
-    queryset = models.MedServiceModel.objects.all()
-    serializer_class = serializers.ServiceSerailizer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedServiceModel
 
-
-class ServiceUpdateView(generics.UpdateAPIView):
-    """Контроллер для получения model:clinic.models.MedServiceModel."""
-
-    queryset = models.MedServiceModel.objects.all()
-    serializer_class = serializers.ServiceSerailizer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
-
-
-class ServiceDestroyView(generics.DestroyAPIView):
+class ServiceDeleteView(generic.DeleteView):
     """Контроллер для удаления экземпляра model:clinic.models.MedService."""
 
-    queryset = models.MedServiceModel.objects.all()
-    serializer_class = serializers.ServiceSerailizer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.MedServiceModel

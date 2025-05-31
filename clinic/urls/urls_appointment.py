@@ -12,13 +12,13 @@ urlpatterns = [
     ),
     path(
         "delete/",
-        appointment_views.AppointmentDestroyView.as_view(),
+        appointment_views.AppointmentDeleteView.as_view(),
         name="delete_appointment",
     ),
     path("list/", appointment_views.AppointmentListView.as_view(), name="appointments"),
     path(
         "detail/",
-        appointment_views.AppointmentRetrieveView.as_view(),
+        appointment_views.AppointmentDetailView.as_view(),
         name="detail_appointment",
     ),
     path(

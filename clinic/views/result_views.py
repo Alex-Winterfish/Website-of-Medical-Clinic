@@ -1,55 +1,29 @@
-from rest_framework import generics, permissions
+from django.views import generic
 from clinic import models
-from clinic import serializers
 
 # Контроллеры для model:clinic.models.ResultModel.
 
 
-class ResultListView(generics.ListAPIView):
+class ResultListView(generic.ListView):
     """Контроллер для получения списка объектов model:clinic.models.ResultModel."""
-
-    queryset = models.ResultModel.objects.all()
-    serializer_class = serializers.ResultSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.ResultModel
 
 
-class ResultCreateView(generics.CreateAPIView):
+class ResultCreateView(generic.CreateView):
     """Контроллер для создания экземпляра model:clinic.models.ResultModel."""
-
-    queryset = models.ResultModel.objects.all()
-    serializer_class = serializers.ResultSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.ResultModel
 
 
-class ResultRetrieveView(generics.RetrieveAPIView):
+class ResultDetailView(generic.DetailView):
     """Контроллер для получения экземпляра model:clinic.models.ResultModel."""
-
-    queryset = models.ResultModel.objects.all()
-    serializer_class = serializers.ResultSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.ResultModel
 
 
-class ResultUpdateView(generics.UpdateAPIView):
+class ResultUpdateView(generic.UpdateView):
     """Контроллер для изменеия экземпляра model:clinic.models.ResultModel."""
-
-    queryset = models.ResultModel.objects.all()
-    serializers = serializers.ResultSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.ResultModel
 
 
-class ResultDestroyView(generics.DestroyAPIView):
+class ResultDeleteView(generic.DeleteView):
     """Контроллер для удаления экземпляа model:clinic.models.ResultModel"""
-
-    queryset = models.ResultModel.objects.all()
-    serializer_class = serializers.ResultSerializer
-    permission_classes = [
-        permissions.AllowAny,
-    ]
+    model = models.ResultModel

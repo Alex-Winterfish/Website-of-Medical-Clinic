@@ -31,14 +31,14 @@
 
     <h2>Команда врачей</h2>
 <div class="row g-3">
-            {% for staff in team %}
+            {% for staff in object_list %}
 <div class="col-12 col-md-4 col-lg-3 d-flex align-items-stretch px-4">
 <div class="card w-100" style="width: 18rem;">
   <img src="{{ staff.photo.url }}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{ staff.name }}</h5>
     <p class="card-text">{{ staff.speciality }}</p>
-    <a href="#" class="btn btn-success">Go somewhere</a>
+    <a href="#" class="btn btn-success">Подробнее о специалисте</a>
   </div>
 </div>
 </div>
