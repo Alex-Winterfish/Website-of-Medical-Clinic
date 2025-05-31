@@ -45,7 +45,7 @@ class MedStaffModel(models.Model):
     speciality = models.CharField(
         choices=SPECIALITY_IN_CHOICES, verbose_name="специальность", blank=True
     )
-
+    photo = models.ImageField(upload_to='clinic', verbose_name='фото специалиста', null=True, blank=True)
     def __str__(self):
         if self.title == self.MD:
             return f"{self.name}: {self.title}-{self.speciality}."

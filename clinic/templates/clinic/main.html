@@ -7,6 +7,7 @@
 
 <div class="container d-flex flex-column bg-light" style="height: 20vh">
 <div class="row-md-4">
+    О компании
     <div class="col-6 p-3">
         Наша компания специализируется на оказании услуг медицинской диагностики
     </div>
@@ -17,14 +18,35 @@
 </div>
 
 <div class="container d-flex flex-column bg-light" style="height: 20vh">
+    Предоставляемые услуги
 <div class="row-md-4">
+    {% for service in med_services %}
     <div class="col-6 p-3">
-        Наша компания специализируется на оказании услуг медицинской диагностики
+
+        {{ service.name }}
+
     </div>
+{% endfor %}
     <div class="col-6">
 
     </div>
 </div>
+</div>
+
+<div class="container d-flex flex-column bg-light" style="height: 20vh">
+    <div class="col-6 p-3">
+        <div class="col-6 p-3">
+            Контактная информация
+        </div>
+    </div>
+</div>
+
+<div class="container d-flex flex-column bg-light" style="height: 20vh">
+    <div class="col-6 p-3">
+        <div class="col-6 p-3">
+            Форма обратной связи
+        </div>
+    </div>
 </div>
 
 {% endblock %}

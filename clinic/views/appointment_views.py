@@ -1,7 +1,6 @@
 from rest_framework import generics, permissions
 from clinic import models
 from clinic import serializers
-
 # Контроллеры для model:clinic.models.AppointmentModel.
 
 
@@ -13,7 +12,6 @@ class AppointmentListView(generics.ListAPIView):
     permission_classes = [
         permissions.AllowAny,
     ]
-
 
 class AppointmentCreateView(generics.CreateAPIView):
     """Контроллер для создания экземпляра model:clinic.models.AppointmentModel."""
