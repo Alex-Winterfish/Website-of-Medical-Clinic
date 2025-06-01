@@ -64,7 +64,14 @@ class MedServiceModel(models.Model):
     description = models.CharField(
         max_length=2000, verbose_name="описание медицинской услуги"
     )
-
+    price = models.PositiveSmallIntegerField(default=100, verbose_name='стоимость')
+    photo = models.ImageField(upload_to='clinic', verbose_name='иллюстрация услуги', null=True, blank=True)
+    med_spec = models.ForeignKey(
+        "clinic.MedStaffModel",
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="назначенный медицинский специалист",
+    )
     def __str__(self):
         return f"Медицинская услуга: {self.name}."
 
@@ -79,12 +86,7 @@ class AppointmentModel(models.Model):
     ap_date = models.DateTimeField(
         verbose_name="дата и время оказания медицинской услуги."
     )
-    med_spec = models.ForeignKey(
-        "clinic.MedStaffModel",
-        on_delete=models.SET_NULL,
-        null=True,
-        verbose_name="назначенный медицинский специалист",
-    )
+
     med_serv = models.ForeignKey(
         "clinic.MedServiceModel",
         on_delete=models.CASCADE,

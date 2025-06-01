@@ -41,3 +41,17 @@ class CustomUser(AbstractUser):
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
+
+
+class FeedBackModel(models.Model):
+    '''Модель обратной связи пользователя'''
+
+    theme = models.CharField(verbose_name='тема', max_length=100)
+    feed_back = models.TextField(verbose_name='текст пользователя', max_length=2000)
+    email = models.EmailField(verbose_name='электронная почта для обратной связи')
+
+    def __str__(self):
+        return self.theme
+    class Meta:
+        verbose_name = 'Земачания пользвателя'
+        verbose_name_plural = 'Замечания пользователей'

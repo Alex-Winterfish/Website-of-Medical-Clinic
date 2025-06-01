@@ -1,5 +1,5 @@
 {% load static %}
-<html lang="ru">
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
   <head>
       <link rel="icon" href="data:;base64,=">
     <meta charset="utf-8">
@@ -15,6 +15,16 @@
 {% block content %}{% endblock %}
 
 </div>
+  <div class="row mt-3">
+  <footer class="bg-success-subtle text-center py-4 mt-auto">
+      <div class="container">
+        <p class="mb-0">&copy; 2025 Мой сайт. Все права защищены.</p>
+        <p class="mb-0">Контакт: AlksBulgakov@gmail.com</p>
+      </div>
+    </footer>
+
       <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </div>
 </body>
+
 </html>

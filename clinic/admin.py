@@ -17,7 +17,7 @@ class StaffAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     """Админка для model:clinic.models.MedServiceModel."""
 
-    list_display = ["name", "description"]
+    list_display = ["name", "description", 'price']
     list_filter = ["name"]
     search_help_text = "name"
 
@@ -26,7 +26,7 @@ class ServiceAdmin(admin.ModelAdmin):
 class AppointmentAdmin(admin.ModelAdmin):
     """Админка для model:clinic.models.AppointmentModel"""
 
-    list_display = ["ap_date", "med_serv", "med_spec", "patient"]
+    list_display = ["ap_date", "med_serv", "patient"]
     list_filter = ["patient", "ap_date"]
     search_help_text = "patient"
 

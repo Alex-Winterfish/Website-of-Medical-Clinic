@@ -2,15 +2,16 @@
 from django.contrib.auth import login
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views import generic
 #from .forms import CustomUserCreationForm
 from django.core.mail import send_mail
 import os
 from dotenv import load_dotenv
+from clinic import models
 
 load_dotenv()
 
-class RegisterView(CreateView):
+class RegisterView(generic.edit.CreateView):
     template_name = "users/register.html"
     #form_class = CustomUserCreationForm
     success_url = reverse_lazy("catalog:product_list")
@@ -31,3 +32,10 @@ class RegisterView(CreateView):
     def form_invalid(self, form):
         print(form.errors)  # Вывод ошибок в консоль
         return render(self.request, self.template_name, {'form': form})
+
+class UserPageView(generic.TemplateView):
+    '''Контроллер для отображения страницы личного кабинета пользователя.'''
+    template_name = 'users/user_page.html'
+
+    def get_context_data(self, **kwargs):
+        pass

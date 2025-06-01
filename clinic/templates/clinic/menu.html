@@ -2,19 +2,30 @@
 
    <div class="mt-auto bg-light p-3 bg-success-subtle">
 
-  <div class="row-md-4">
+  <div class="row md-4">
 <div class="col-8">
 
 
 <a href="/main/" type="button" class="btn btn-success">Главная</a>
   <a href='/staff/list/' type="button" class="btn btn-success">О компании</a>
-  <a href="#" type="button" class="btn btn-success">Услуги</a>
-  <a href="#" type="button" class="btn btn-success">Контакты</a>
-<a href="#" type="button" class="btn btn-success">Личный кабинет</a>
+  <a href="/services/list/" type="button" class="btn btn-success">Услуги</a>
+  <a href="/contacts/" type="button" class="btn btn-success">Контакты</a>
+    {% if user.is_authenticated %}
+<a href="/user_page/" type="button" class="btn btn-success">Личный кабинет</a>
+    {% endif %}
 
 
 </div>
+      <div class="col-4"><div class="btn-group" role="group" aria-label="Basic outlined example">
+          {% if user.is_authenticated %}
+          <a href='#' type='button' class="btn btn-outline-success">Выход</a>
+          {% else %}
+          <a href='#' type='button' class="btn btn-outline-success">Вход</a>
+          <a href='#' type='button' class="btn btn-outline-success">Регистрация</a>
+          {% endif %}
+</div></div>
 </div>
+
 
    </div>
 

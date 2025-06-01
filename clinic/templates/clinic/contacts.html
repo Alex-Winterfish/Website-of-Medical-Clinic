@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'clinic/base.html' %}
 
-</body>
-</html>
+{% block title %}О нашей компании{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+
+<div class="container d-flex flex-column bg-light md-3" style="height: 40vh">
+
+    <div class="row bg-light">
+        <div class="col-3 p-4">
+<div class="card" style="width: 20rem;">
+    <div class="card-header">Карта проезда</div>
+    <div style="width: 100%; height: 400px;">
+  <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A4d4358411784aba12038dd1046078edb07d457595fef23454cdf556dd606c752&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
+  <div class="card-body">
+</div>
+        </div>
+        </div>
+        </div>
+            <div class="col-3 p-4">
+                <div class="card" style="width: 18rem;">
+  <div class="card-header">
+    Контактная информация
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><p>Электронная почта:</p><p>exemple@mail.com</p></li>
+    <li class="list-group-item"><p>Телефон:</p><p>8(800)888-88-88</p></li>
+  </ul>
+</div>
+            </div>
+                    <div class="col-3 p-4">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+                    </div></div></div>
+
+{% endblock %}

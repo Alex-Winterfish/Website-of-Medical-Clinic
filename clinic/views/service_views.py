@@ -7,7 +7,7 @@ from clinic import models
 class ServiceListView(generic.ListView):
     """Контроллер для вывода списка model:clinic.models.MedServiceModel."""
     model = models.MedServiceModel
-    template_name = 'clinic/company_page.html'
+    template_name = 'clinic/services.html'
 
 
 

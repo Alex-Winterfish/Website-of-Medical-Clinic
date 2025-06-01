@@ -19,8 +19,8 @@ class Command(BaseCommand):
             {
                 "name": "Селезнев Александр Виторович",
                 "title": "Врач",
-                "speciality": "онколог",
-                'photo': 'clinic/selezvev_md.jpg'
+                "speciality": "терапевт",
+                'photo': 'clinic/seleznev_md.jpg'
             },
             {
                 "name": "Бандурина Вера Александровна",
