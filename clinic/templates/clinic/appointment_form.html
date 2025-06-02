@@ -1,0 +1,27 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}Запись на прием{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+
+<div class="container p-5">
+
+    <div class="col-lg-5 col-md-6 col-sm-12">
+
+    <div class="card md-4 box-shadow">
+        <div class="card-header">Запись на: {{ service_name }}</div>
+    <div class="card-body">
+        <form method="post" action="" class="form-floating">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-lg btn-block btn-success">Записаться</button>
+    </div></form>
+    </div></div></div>
+</div>
+
+{% endblock %}
+
+

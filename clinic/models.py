@@ -83,9 +83,10 @@ class MedServiceModel(models.Model):
 class AppointmentModel(models.Model):
     """Модель запись на медицинскую услугу model:clinic.models.AppointmentModel."""
 
-    ap_date = models.DateTimeField(
-        verbose_name="дата и время оказания медицинской услуги."
+    ap_date = models.DateField(
+        verbose_name="дата записи."
     )
+    ap_time = models.TimeField(verbose_name='врямя записи.')
 
     med_serv = models.ForeignKey(
         "clinic.MedServiceModel",

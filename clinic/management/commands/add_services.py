@@ -26,8 +26,8 @@ class Command(BaseCommand):
             {
                 'name': 'Осмотр у терапевта',
                 'description': 'Терапевтический осмотр у специалиста',
-                'price': 5550,
-                'photo': 'clinic/mri.jpg',
+                'price': 2000,
+                'photo': 'clinic/checkup.jpg',
                 'med_spec': MedStaffModel.objects.get(speciality='терапевт'),
             }
         ]

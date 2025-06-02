@@ -3,31 +3,19 @@ from django.contrib.auth import login
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-#from .forms import CustomUserCreationForm
+from users import forms
 from django.core.mail import send_mail
 import os
 from dotenv import load_dotenv
-from clinic import models
+from users import models, forms
 
 load_dotenv()
 
 class RegisterView(generic.edit.CreateView):
     template_name = "users/register.html"
-    #form_class = CustomUserCreationForm
-    success_url = reverse_lazy("catalog:product_list")
+    form_class = forms.CustomUserCreationForm
+    success_url = reverse_lazy("clinic:main")
 
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        self.send_welcome_email(user.email)
-        return super().form_valid(form)
-
-    def send_welcome_email(self, user_email):
-        subject = "Добро пожаловать в наш сервис"
-        message = "Спасибо, что зарегистрировались в нашем сервисе!"
-        from_email = os.getenv("EMAIL_HOST_USER")
-        recipient_list = [user_email]
-        send_mail(subject, message, from_email, recipient_list)
 
     def form_invalid(self, form):
         print(form.errors)  # Вывод ошибок в консоль
@@ -39,3 +27,10 @@ class UserPageView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         pass
+
+class FeedBackCreateView(generic.CreateView):
+    '''Контроллер для создания экземпляра model:users.models.FeedBackmodel.'''
+    template_name = 'users/feedback_form.html'
+    model = models.FeedBackModel
+    form_class = forms.FeedBackForm
+    success_url = reverse_lazy('clinic:main')

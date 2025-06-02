@@ -137,7 +137,7 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 LOGIN_URL = "login/"
 
-LOGIN_REDIRECT_URL = ""
+LOGIN_REDIRECT_URL = "/main/"
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
