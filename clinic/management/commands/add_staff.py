@@ -14,18 +14,18 @@ class Command(BaseCommand):
                 "name": "Васютин Александр Анатольевич",
                 "title": "Врач",
                 "speciality": "рентгенолог",
-                'photo': 'clinic/vasutin_md.jpg'
+                "photo": "clinic/vasutin_md.jpg",
             },
             {
                 "name": "Селезнев Александр Виторович",
                 "title": "Врач",
                 "speciality": "терапевт",
-                'photo': 'clinic/seleznev_md.jpg'
+                "photo": "clinic/seleznev_md.jpg",
             },
             {
                 "name": "Бандурина Вера Александровна",
                 "title": "Медсестра",
-                'photo': 'clinic/vera_nurse.jpg'
+                "photo": "clinic/vera_nurse.jpg",
             },
         ]
 

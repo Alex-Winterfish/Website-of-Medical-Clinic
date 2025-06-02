@@ -9,8 +9,9 @@ class CustomUserAdmin(admin.ModelAdmin):
     list_filter = ["last_name", "first_name", "patronymic", "email"]
     search_help_text = "last_name"
 
+
 @admin.register(FeedBackModel)
 class FeedBackAdmin(admin.ModelAdmin):
-    list_display = ['theme', 'email', 'feed_back']
-    list_filter = ['theme', 'email', 'feed_back']
-    search_help_text = 'theme'
+    list_display = ["theme", "email", "feed_back"]
+    list_filter = ["theme", "email", "feed_back"]
+    search_help_text = "theme"

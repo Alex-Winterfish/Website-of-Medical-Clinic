@@ -6,5 +6,5 @@ app_name = ClinicConfig.name
 
 urlpatterns = [
     path("main/", MainPageView.as_view(), name="main"),
-    path('contacts/', ContactsView.as_view(), name='contacts')
+    path("contacts/", ContactsView.as_view(), name="contacts"),
 ]

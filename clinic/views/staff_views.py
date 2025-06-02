@@ -7,8 +7,7 @@ class StaffListView(generic.ListView):
     """Контроллер для вывода списка сущностей models: clinic.model.MedStaffModel."""
 
     model = models.MedStaffModel
-    template_name = 'clinic/company_page.html'
-
+    template_name = "clinic/company_page.html"
 
 
 class StaffCreateView(generic.CreateView):
@@ -21,6 +20,7 @@ class StaffUpdateView(generic.UpdateView):
     """Контроллер для изменения сущности models: clinic.model.MedStaffModel."""
 
     model = models.MedStaffModel
+
 
 class StaffDetailView(generic.DetailView):
     """Контроллер для получения сущности models: clinic.model.MedStaffModel."""

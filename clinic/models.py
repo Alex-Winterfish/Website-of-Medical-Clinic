@@ -45,7 +45,10 @@ class MedStaffModel(models.Model):
     speciality = models.CharField(
         choices=SPECIALITY_IN_CHOICES, verbose_name="специальность", blank=True
     )
-    photo = models.ImageField(upload_to='clinic', verbose_name='фото специалиста', null=True, blank=True)
+    photo = models.ImageField(
+        upload_to="clinic", verbose_name="фото специалиста", null=True, blank=True
+    )
+
     def __str__(self):
         if self.title == self.MD:
             return f"{self.name}: {self.title}-{self.speciality}."
@@ -64,14 +67,17 @@ class MedServiceModel(models.Model):
     description = models.CharField(
         max_length=2000, verbose_name="описание медицинской услуги"
     )
-    price = models.PositiveSmallIntegerField(default=100, verbose_name='стоимость')
-    photo = models.ImageField(upload_to='clinic', verbose_name='иллюстрация услуги', null=True, blank=True)
+    price = models.PositiveSmallIntegerField(default=100, verbose_name="стоимость")
+    photo = models.ImageField(
+        upload_to="clinic", verbose_name="иллюстрация услуги", null=True, blank=True
+    )
     med_spec = models.ForeignKey(
         "clinic.MedStaffModel",
         on_delete=models.SET_NULL,
         null=True,
         verbose_name="назначенный медицинский специалист",
     )
+
     def __str__(self):
         return f"Медицинская услуга: {self.name}."
 
@@ -83,10 +89,8 @@ class MedServiceModel(models.Model):
 class AppointmentModel(models.Model):
     """Модель запись на медицинскую услугу model:clinic.models.AppointmentModel."""
 
-    ap_date = models.DateField(
-        verbose_name="дата записи."
-    )
-    ap_time = models.TimeField(verbose_name='врямя записи.')
+    ap_date = models.DateField(verbose_name="дата записи.")
+    ap_time = models.TimeField(verbose_name="врямя записи.")
 
     med_serv = models.ForeignKey(
         "clinic.MedServiceModel",
