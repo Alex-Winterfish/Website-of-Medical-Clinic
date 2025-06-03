@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import DateInput
+from django.forms import DateInput, Select
 
 from clinic import models
 
@@ -10,9 +10,12 @@ class AppointmentForm(forms.ModelForm):
 
     class Meta:
         model = models.AppointmentModel
-        fields = ["ap_date", "ap_time"]
+        fields = ["med_serv", "ap_date", "ap_time"]
 
         widgets = {
+            "med_serv": Select(
+                attrs={"class": "form-control", "placeholder": "Выберите услуг"}
+            ),
             "ap_date": DateInput(
                 attrs={
                     "class": "form-control",

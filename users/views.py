@@ -8,6 +8,8 @@ from django.core.mail import send_mail
 import os
 from dotenv import load_dotenv
 from users import models, forms
+from clinic.models import AppointmentModel, ResultModel
+from clinic.forms import AppointmentForm
 
 load_dotenv()
 
@@ -22,13 +24,27 @@ class RegisterView(generic.edit.CreateView):
         return render(self.request, self.template_name, {"form": form})
 
 
-class UserPageView(generic.TemplateView):
+class UserPageView(generic.CreateView):
     """Контроллер для отображения страницы личного кабинета пользователя."""
 
     template_name = "users/user_page.html"
+    model = AppointmentModel
+    form_class = AppointmentForm
+    success_url = reverse_lazy("users:user_page")
 
     def get_context_data(self, **kwargs):
-        pass
+        context = super().get_context_data(**kwargs)
+        appointments = AppointmentModel.objects.filter(patient=self.request.user)
+        print(appointments)
+        results = ResultModel.objects.filter(patient=self.request.user)
+        print(results)
+        context["appointments"] = appointments
+        context["results"] = results
+        return context
+
+    def form_valid(self, form):
+        form.instance.patient = self.request.user
+        return super().form_valid(form)
 
 
 class FeedBackCreateView(generic.CreateView):

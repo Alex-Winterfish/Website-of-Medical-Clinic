@@ -20,6 +20,11 @@ class AppointmentCreateView(generic.CreateView):
     form_class = forms.AppointmentForm
     success_url = reverse_lazy("clinic:main")
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        del form.fields["med_serv"]
+        return form
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         id = self.kwargs.get("pk")

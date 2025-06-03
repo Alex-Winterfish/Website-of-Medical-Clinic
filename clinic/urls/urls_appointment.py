@@ -6,7 +6,7 @@ app_name = ClinicConfig.name
 
 urlpatterns = [
     path(
-        "create/<int:pk>/",
+        "create/<int:pk>/" or "",
         appointment_views.AppointmentCreateView.as_view(),
         name="create_appointment",
     ),

@@ -4,5 +4,52 @@
 
 {% block content %}
 {% include 'clinic/menu.html' %}
+<div class="container d-flex flex-column bg-light" style="height: 20vh">
+    <div class="row">
+<div class="col">
+    <div class="container p-5">
 
+    <div class="col-lg-5 col-md-6 col-sm-12">
+
+    <div class="card md-4 box-shadow">
+        <div class="card-header">Записаться на прием.</div>
+    <div class="card-body">
+        <form method="post" action="" class="form-floating">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-lg btn-block btn-success">Записаться</button>
+    </div></form>
+    </div></div></div>
+</div>
+</div>
+    <div class="col">
+<div class="container p-5">
+        <div class="card md-4 box-shadow">
+            <div class="card-header">
+            История записей
+            </div>
+        <ul class="list-group list-group-flush">
+        {% for ap in appointments %}
+
+        <li class="list-group-item">{{ ap.med_serv.name }}. Дата: {{ ap.ap_date }}</li>
+    {% endfor %}
+</ul>
+
+        </div>
+</div>
+    </div>
+    <div class="col"> <div class="container p-5">
+        <div class="card md-4 box-shadow">
+            <div class="card-header">
+            Результаты диагнистики
+            </div>
+        <ul class="list-group list-group-flush">
+        {% for res in results %}
+            <li class="list-group-item">
+                {{ res.appointment.med_serv.name }}. Дата: {{ res.result_date }} <a href="/results/detail/{{ res.id }}/" class="btn btn-success">Посмотреть</a></li>
+            {% endfor %}</ul>
+        </div>
+</div> </div></div>
+</div>
 {% endblock %}

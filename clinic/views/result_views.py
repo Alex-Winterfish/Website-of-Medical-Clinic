@@ -19,6 +19,7 @@ class ResultCreateView(generic.CreateView):
 class ResultDetailView(generic.DetailView):
     """Контроллер для получения экземпляра model:clinic.models.ResultModel."""
 
+    template_name = "clinic/result.html"
     model = models.ResultModel
 
 
