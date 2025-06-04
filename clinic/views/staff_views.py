@@ -1,6 +1,9 @@
 from django.views import generic
 from clinic import models
-
+from users.models import ContentModel
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Контроллеры для CRUD операций model:clinic.models.MedStaffModel.
 class StaffListView(generic.ListView):
@@ -8,6 +11,11 @@ class StaffListView(generic.ListView):
 
     model = models.MedStaffModel
     template_name = "clinic/company_page.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=None, **kwargs)
+        context['company'] = ContentModel.objects.get(company=os.getenv('COMPANY_NAME'))
+        return context
 
 
 class StaffCreateView(generic.CreateView):

@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from users.validators import phone_number_validator
 
 
 class CustomUser(AbstractUser):
@@ -56,3 +57,23 @@ class FeedBackModel(models.Model):
     class Meta:
         verbose_name = "Земачания пользвателя"
         verbose_name_plural = "Замечания пользователей"
+
+
+class ContentModel(models.Model):
+    '''Модель контента сайта.'''
+
+    company = models.CharField(verbose_name='Медицинская компания', max_length=150)
+    about = models.TextField(verbose_name='Описание медицинской компании', max_length=2000)
+    email = models.EmailField(verbose_name='Электронная почта компании')
+    phone = models.CharField(verbose_name='телефонный номер компании', validators=[phone_number_validator])
+    history = models.TextField(verbose_name='История компании', max_length=2000)
+    values = models.TextField(verbose_name='Миссия и ценности', max_length=2000)
+    address = models.CharField(verbose_name='Адрес клиники', max_length=200)
+    map_address = models.URLField(verbose_name='Карта проезда(ссылка iframe)',max_length=2000)
+
+    def __str__(self):
+        return f'Контент для сайта компании {self.company}.'
+
+    class Meta:
+        verbose_name = 'компания'
+        verbose_name_plural = 'компании'

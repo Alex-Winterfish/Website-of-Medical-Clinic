@@ -6,47 +6,55 @@
 {% include 'clinic/menu.html' %}
 
 
-<div class="container d-flex flex-column bg-light md-3" style="height: 40vh">
+<div class="container d-flex flex-column bg-light p-3">
 
     <div class="row bg-light">
-        <div class="col-3 p-4">
-<div class="card" style="width: 20rem;">
-    <div class="card-header">Карта проезда</div>
-    <div style="width: 100%; height: 400px;">
-  <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A4d4358411784aba12038dd1046078edb07d457595fef23454cdf556dd606c752&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
-  <div class="card-body">
-</div>
-        </div>
-        </div>
-        </div>
-            <div class="col-3 p-4">
-                <div class="card" style="width: 18rem;">
+
+            <div class="col col-md-4 col-lg-4 p-3">
+                <div class="card">
   <div class="card-header">
-    Контактная информация
+      <p class="fst-italic fs-3 fw-bold">Контактная информация</p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><p>Электронная почта:</p><p>exemple@mail.com</p></li>
-    <li class="list-group-item"><p>Телефон:</p><p>8(800)888-88-88</p></li>
+    <li class="list-group-item fst-italic fs-5"><p>Электронная почта:</p><p>{{ company.email }}</p></li>
+    <li class="list-group-item fst-italic fs-5"><p>Телефон:</p><p>{{ company.phone }}</p></li>
+      <li class="list-group-item fst-italic fs-5"><p>Адрес:</p><p>{{ company.address }}</p></li>
   </ul>
 </div>
             </div>
-                    <div class="col-6 p-4">
 
 
-    <div class="col-lg-5 col-md-6 col-sm-12">
-    <div class="card md-4 box-shadow">
-        <div class="card-header">Форма для связи с нами</div>
+<div class="col col-md-4 col-lg-4 p-3">
+
+    <div class="card">
+        <div class="card-header">
+            <p class="fst-italic fs-3 fw-bold">
+            Форма для связи с нами
+            </p></div>
     <div class="card-body">
-        <form method="post" action="" class="form-floating">
+        <form method="post" action="" class="form-floating fst-italic fs-5">
     {% csrf_token %}
     <div class="mb-3">
         {{ form.as_p }}
         <button type="submit" class="btn btn-lg btn-block btn-success">Отправить</button>
     </div></form>
-    </div></div></div>
+    </div></div>
 
 
 
-                    </div></div></div>
+
+</div>
+<div class="col col-md-4 col-lg-4 p-3">
+<div class="card" style="width: 20rem;">
+    <div class="card-header fst-italic fs-3 fw-bold">Карта проезда</div>
+    <div style="width: 100%; height: 400px;">
+  <iframe src="{{ company.map_address }}" width="100%" height="400" frameborder="0"></iframe>
+  <div class="card-body">
+</div>
+        </div>
+        </div>
+        </div>
+
+                    </div></div>
 
 {% endblock %}

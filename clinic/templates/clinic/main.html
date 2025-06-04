@@ -13,7 +13,7 @@
     <div class="card mx-5" style="width: 25rem;">
         <div class="card-header">
             <p class="fst-italic fs-3 fw-bold">О компании</p></div>
-        <div class="card-body"><p class="fst-italic p-3">Наша компания специализируется на оказании услуг медицинской диагностики</p></div>
+        <div class="card-body"><p class="fst-italic p-3">{{ company.about }}</p></div>
     </div>
         </div>
 
@@ -60,8 +60,9 @@
       <p class="fst-italic fs-3 fw-bold">Контактная информация</p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><p>Электронная почта:</p><p>exemple@mail.com</p></li>
-    <li class="list-group-item"><p>Телефон:</p><p>8(800)888-88-88</p></li>
+    <li class="list-group-item fst-italic fs-5""><p>Электронная почта:</p><p>{{ company.email }}</p></li>
+    <li class="list-group-item fst-italic fs-5""><p>Телефон:</p><p>{{ company.phone }}</p></li>
+      <li class="list-group-item fst-italic fs-5"><p>Адрес:</p><p>{{ company.address }}</p></li>
   </ul>
 </div>
     </div></div>

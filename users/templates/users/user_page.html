@@ -4,52 +4,52 @@
 
 {% block content %}
 {% include 'clinic/menu.html' %}
-<div class="container d-flex flex-column bg-light" style="height: 20vh">
+<div class="container bg-light p-3">
     <div class="row">
-<div class="col">
-    <div class="container p-5">
+<div class="col-12 col-md-4 col-lg-3 d-flex px-4">
 
-    <div class="col-lg-5 col-md-6 col-sm-12">
-
-    <div class="card md-4 box-shadow">
-        <div class="card-header">Записаться на прием.</div>
+    <div class="card md-4 mt-3 box-shadow">
+        <div class="card-header fst-italic fs-3 fw-bold">Записаться на прием.</div>
     <div class="card-body">
-        <form method="post" action="" class="form-floating">
+        <form method="post" action="" class="form-floating fst-italic fs-5">
     {% csrf_token %}
     <div class="mb-3">
         {{ form.as_p }}
         <button type="submit" class="btn btn-lg btn-block btn-success">Записаться</button>
     </div></form>
-    </div></div></div>
+    </div></div>
+
 </div>
-</div>
-    <div class="col">
-<div class="container p-5">
-        <div class="card md-4 box-shadow">
-            <div class="card-header">
+
+
+    <div class="col-12 col-md-4 col-lg-3 d-flex px-4">
+
+        <div class="card md-4 mt-3 box-shadow">
+            <div class="card-header fst-italic fs-3 fw-bold">
             История записей
             </div>
         <ul class="list-group list-group-flush">
         {% for ap in appointments %}
 
-        <li class="list-group-item">{{ ap.med_serv.name }}. Дата: {{ ap.ap_date }}</li>
+        <li class="list-group-item fst-italic fs-5">{{ ap.med_serv.name }}. Дата: {{ ap.ap_date }}</li>
     {% endfor %}
 </ul>
 
         </div>
-</div>
+
     </div>
-    <div class="col"> <div class="container p-5">
-        <div class="card md-4 box-shadow">
-            <div class="card-header">
+    <div class="col-12 col-md-4 col-lg-3 d-flex px-4">
+
+        <div class="card md-4 mt-3 box-shadow">
+            <div class="card-header fst-italic fs-3 fw-bold">
             Результаты диагнистики
             </div>
         <ul class="list-group list-group-flush">
         {% for res in results %}
             <li class="list-group-item">
-                {{ res.appointment.med_serv.name }}. Дата: {{ res.result_date }} <a href="/results/detail/{{ res.id }}/" class="btn btn-success">Посмотреть</a></li>
+                <p class="fst-italic fs-5">{{ res.appointment.med_serv.name }}. Дата: {{ res.result_date }}</p> <a href="/results/detail/{{ res.id }}/" class="btn btn-success">Посмотреть</a></li>
             {% endfor %}</ul>
         </div>
-</div> </div></div>
+ </div></div>
 </div>
 {% endblock %}

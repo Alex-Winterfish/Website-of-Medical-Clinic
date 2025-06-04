@@ -7,19 +7,19 @@
 
 <div class="container d-flex flex-column bg-light px-4">
 
-    <h2>Наши медицинские услуги</h2>
+    <p class="fst-italic fs-3 fw-bold">Наши медицинские услуги</p>
 <div class="row g-3">
             {% for service in object_list %}
 <div class="col-12 col-md-4 col-lg-3 d-flex align-items-stretch px-4">
 <div class="card w-100 " style="width: 18rem;">
     <div class="card-header">
-        <h5 class="card-title">{{ service.name }}</h5>
+        <h5 class="card-title fst-italic fs-5">{{ service.name }}</h5>
     </div>
   <img src="{{ service.photo.url }}" class="card-img-top" alt="...">
   <div class="card-body">
 
-    <p class="card-text">{{ service.description }}</p>
-      <p>Стоимость: {{ service.price }}</p>
+    <p class="card-text fst-italic fs-5">{{ service.description }}</p>
+      <p class="fst-italic fs-5">Стоимость: {{ service.price }}</p>
 
   </div>
     <div class="card-footer"><a href="/appointment/create/{{ service.id }}/" class="btn btn-success">Запись на процедуру</a></div>
