@@ -19,6 +19,12 @@ class RegisterView(generic.edit.CreateView):
     form_class = forms.CustomUserCreationForm
     success_url = reverse_lazy("clinic:main")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context["in_group"] = user.groups.filter(name="moders").exists()
+        return context
+
     def form_invalid(self, form):
         print(form.errors)  # Вывод ошибок в консоль
         return render(self.request, self.template_name, {"form": form})
@@ -38,6 +44,8 @@ class UserPageView(generic.CreateView):
         print(appointments)
         results = ResultModel.objects.filter(patient=self.request.user)
         print(results)
+        user = self.request.user
+        context["in_group"] = user.groups.filter(name="moders").exists()
         context["appointments"] = appointments
         context["results"] = results
         return context

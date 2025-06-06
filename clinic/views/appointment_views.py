@@ -32,6 +32,8 @@ class AppointmentCreateView(generic.CreateView):
             id=id
         )  # получаем экземпляр модели медуслуги для передачи в контекст
         service_name = service_inst.name
+        user = self.request.user
+        context["in_group"] = user.groups.filter(name="moders").exists()
         context["service_name"] = service_name
         return context
 
@@ -43,7 +45,7 @@ class AppointmentCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-class AppointmentDetailView(generic.DetailView):
+'''class AppointmentDetailView(generic.DetailView):
     """Контроллер для получения экземпляра model:clinic.models.AppointmentModel."""
 
     model = models.AppointmentModel
@@ -59,3 +61,4 @@ class AppointmentDeleteView(generic.DeleteView):
     """Контроллер для удаления экземпляра model:clinic.models.AppointmentModel."""
 
     model = models.AppointmentModel
+'''

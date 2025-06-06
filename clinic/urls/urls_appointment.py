@@ -10,7 +10,9 @@ urlpatterns = [
         appointment_views.AppointmentCreateView.as_view(),
         name="create_appointment",
     ),
-    path(
+]
+"""
+path(
         "delete/",
         appointment_views.AppointmentDeleteView.as_view(),
         name="delete_appointment",
@@ -25,5 +27,4 @@ urlpatterns = [
         "update/",
         appointment_views.AppointmentUpdateView.as_view(),
         name="update_appointment",
-    ),
-]
+    ),"""

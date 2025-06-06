@@ -1,0 +1,33 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}Страничка модератора{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+<div class="container d-flex flex-column bg-light px-4">
+<div class="row">
+
+
+    <div class="col col-md-4 col-lg-6 p-3">
+
+            <div class="card md-4 box-shadow">
+        <div class="card-header fst-italic fs-3 fw-bold">Оформить результат медуслуги.</div>
+    <div class="card-body fst-italic fs-5">
+        <form method="post" action="" class="form-floating">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-lg btn-block btn-success">Оформить</button>
+    </div></form>
+    </div></div>
+
+
+    </div>
+
+</div>
+</div>
+</div>
+
+
+{% endblock %}

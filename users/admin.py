@@ -16,8 +16,20 @@ class FeedBackAdmin(admin.ModelAdmin):
     list_filter = ["theme", "email", "feed_back"]
     search_help_text = "theme"
 
+
 @admin.register(ContentModel)
 class ContentAdmin(admin.ModelAdmin):
-    list_display = ['company','about','email','email','email','email','address','map_address']
-    list_filter = ['company',]
-    search_help_text = 'company'
+    list_display = [
+        "company",
+        "about",
+        "email",
+        "email",
+        "email",
+        "email",
+        "address",
+        "map_address",
+    ]
+    list_filter = [
+        "company",
+    ]
+    search_help_text = "company"

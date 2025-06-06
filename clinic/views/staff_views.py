@@ -3,7 +3,9 @@ from clinic import models
 from users.models import ContentModel
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
+
 
 # Контроллеры для CRUD операций model:clinic.models.MedStaffModel.
 class StaffListView(generic.ListView):
@@ -14,10 +16,13 @@ class StaffListView(generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=None, **kwargs)
-        context['company'] = ContentModel.objects.get(company=os.getenv('COMPANY_NAME'))
+        user = self.request.user
+        context["in_group"] = user.groups.filter(name="moders").exists()
+        context["company"] = ContentModel.objects.get(company=os.getenv("COMPANY_NAME"))
         return context
 
 
+'''
 class StaffCreateView(generic.CreateView):
     """Контроллер для cсоздания сощности models: clinic.model.MedStaffModel."""
 
@@ -40,3 +45,4 @@ class StaffDeleteView(generic.DeleteView):
     """Контроллер для удаления models: clinic.model.MedStaffModel."""
 
     model = models.MedStaffModel
+'''
