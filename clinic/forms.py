@@ -1,7 +1,5 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.forms import DateInput, Select, Textarea
-
 from clinic import models
 
 
@@ -48,3 +46,20 @@ class ResultForm(forms.ModelForm):
                 attrs={"class": "form-control", "placeholder": "Напишите заключение"}
             ),
         }
+
+
+"""
+class ServiceForm(forms.ModelForm):
+    '''Форма для создания model:clinic.models.MedServiceModel.'''
+    class Meta:
+        model = models.MedServiceModel
+        fields = ['name', 'description', 'price', 'photo', 'med_spec']
+        widgets = {
+            'name': {"class": "form-control", "placeholder": "Назмание медицинской услуги"},
+            'description': Textarea(attrs={"class": "form-control", "placeholder": "Напишите заключение"}),
+            'price': '',
+            'photo': '',
+            'med_spec': Select(
+                attrs={"class": "form-control", "placeholder": "Выберите назначение"}
+            ),
+        }"""

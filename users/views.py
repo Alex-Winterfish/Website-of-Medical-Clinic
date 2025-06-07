@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth import login
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-from users import forms
-from django.core.mail import send_mail
-import os
 from dotenv import load_dotenv
 from users import models, forms
 from clinic.models import AppointmentModel, ResultModel
@@ -41,9 +37,7 @@ class UserPageView(generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         appointments = AppointmentModel.objects.filter(patient=self.request.user)
-        print(appointments)
         results = ResultModel.objects.filter(patient=self.request.user)
-        print(results)
         user = self.request.user
         context["in_group"] = user.groups.filter(name="moders").exists()
         context["appointments"] = appointments

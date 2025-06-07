@@ -2,11 +2,13 @@ from django.test import TestCase, Client
 from clinic import models
 from users.models import CustomUser
 from django.utils.timezone import datetime
+from django.shortcuts import reverse
 
 
 class AppointmentTestCase(TestCase):
 
     def setUp(self):
+
         staff = [
             {
                 "name": "Васютин Александр Анатольевич",
@@ -85,17 +87,59 @@ class AppointmentTestCase(TestCase):
             app_bw.patient, CustomUser.objects.get(email="user_1@mail.com")
         )
 
-    def test_appointment_create_view(self):
-        """Тест проверяет создание model:clinic.models.AppointmentModel."""
+    def test_user_page_view(self):
+        """Тест проверяет создание model:clinic.models.AppointmentModel
+        в личном кабиете пользователя."""
 
-        appointment = {
-            "ap_date": datetime.now(),
-            "ap_time": datetime.now(),
-        }
+        url = reverse("users:user_page")
+
         client = Client()
 
+        login_success = client.login(email="user_1@mail.com", password="12345")
+        self.assertTrue(login_success)
+
+        appointment = {
+            "med_serv": models.MedServiceModel.objects.get(
+                name="Общий анализ крови"
+            ).id,
+            "ap_date": "2025-03-12",
+            "ap_time": "10:10:10",
+        }
+
         response = client.post(
-            f"/appointment/create/{models.MedServiceModel.objects.get(name='Общий анализ крови').id}/",
-            **appointment,
+            url,
+            appointment,
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            models.AppointmentModel.objects.filter(ap_date="2025-03-12").exists()
+        )
+        self.assertEqual(response.status_code, 302)
+
+    def test_appointment_view(self):
+        """Тестирование создание model:clinic.models.AppointmentModel в шаблоне clinic/appointment_form.html"""
+
+        url = reverse(
+            "appointments:create_appointment",
+            kwargs={
+                "pk": models.MedServiceModel.objects.get(name="Общий анализ крови").id
+            },
+        )
+
+        client = Client()
+
+        login_success = client.login(email="user_1@mail.com", password="12345")
+        self.assertTrue(login_success)
+
+        appointment = {
+            "ap_date": "2025-03-13",
+            "ap_time": "10:10:10",
+        }
+
+        response = client.post(
+            url,
+            appointment,
+        )
+        self.assertTrue(
+            models.AppointmentModel.objects.filter(ap_date="2025-03-13").exists()
+        )
+        self.assertEqual(response.status_code, 302)

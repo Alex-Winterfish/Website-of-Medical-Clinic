@@ -3,8 +3,6 @@ from django.views import generic
 from clinic import models, forms
 from django.utils.timezone import datetime
 
-from users.models import CustomUser
-
 
 # Контроллеры для model:clinic.models.ResultModel.
 
@@ -59,14 +57,22 @@ class ResultCreateView(generic.CreateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        app_pk = self.kwargs.get("pk")
-        if app_pk:
+        app_pk = self.kwargs.get(
+            "pk"
+        )  # pk экземпляра model:clinic.models.AppointmentModel
+        if (
+            app_pk
+        ):  # передаем в форму pk экземпляра model:clinic.models.AppointmentModel
             kwargs["initial"] = kwargs.get("initial", {})
             kwargs["initial"]["appointment"] = app_pk
         return kwargs
 
     def form_valid(self, form):
-        form.instance.patient = CustomUser.objects.get(email="example_1@mail.com")
+        app_pk = self.kwargs.get(
+            "pk"
+        )  # pk экземпляра model:clinic.models.AppointmentModel
+        user_pk = models.AppointmentModel.objects.get(id=app_pk).patient
+        form.instance.patient = user_pk
         form.instance.result_date = datetime.now()
         return super().form_valid(form)
 
