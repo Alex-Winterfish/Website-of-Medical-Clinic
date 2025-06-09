@@ -17,7 +17,9 @@ services:
   clinic:
     build: .
     command: >
-      sh -c './wait-for-it.sh db:5432 --timeout=60 --strict && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py add_staff && python manage.py add_services&& python manage.py runserver 0.0.0.0:8000'
+      sh -c './wait-for-it.sh db:5432 --timeout=60 --strict && python manage.py collectstatic --noinput 
+      && python manage.py migrate && python manage.py add_staff && python manage.py add_services && 
+      python manage.py add_users && python manage.py add_group && python manage.py runserver 0.0.0.0:8000'
     volumes:
       - clinic:/clinic
       - static_volume:/clinic/static
