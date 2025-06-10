@@ -23,7 +23,6 @@ class CustomUser(AbstractUser):
     phone = models.CharField(
         max_length=35,
         verbose_name="Phone",
-        null=True,
         blank=True,
         help_text="Введите номер телефона",
     )
@@ -68,7 +67,9 @@ class ContentModel(models.Model):
     )
     email = models.EmailField(verbose_name="Электронная почта компании")
     phone = models.CharField(
-        verbose_name="телефонный номер компании", validators=[phone_number_validator]
+        max_length=100,
+        verbose_name="телефонный номер компании",
+        validators=[phone_number_validator],
     )
     history = models.TextField(verbose_name="История компании", max_length=2000)
     values = models.TextField(verbose_name="Миссия и ценности", max_length=2000)

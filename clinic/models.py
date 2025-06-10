@@ -40,13 +40,16 @@ class MedStaffModel(models.Model):
         max_length=1000, verbose_name="Ф.И.О медицинского специалиста."
     )
     title = models.CharField(
-        choices=TITLE_IN_CHOICES, verbose_name="медицинская должность"
+        max_length=20, choices=TITLE_IN_CHOICES, verbose_name="медицинская должность"
     )
     speciality = models.CharField(
-        choices=SPECIALITY_IN_CHOICES, verbose_name="специальность", blank=True
+        max_length=20,
+        choices=SPECIALITY_IN_CHOICES,
+        verbose_name="специальность",
+        blank=True,
     )
     photo = models.ImageField(
-        upload_to="clinic", verbose_name="фото специалиста", null=True, blank=True
+        upload_to="clinic", verbose_name="фото специалиста", blank=True
     )
 
     def __str__(self):
@@ -69,7 +72,7 @@ class MedServiceModel(models.Model):
     )
     price = models.PositiveSmallIntegerField(default=100, verbose_name="стоимость")
     photo = models.ImageField(
-        upload_to="clinic", verbose_name="иллюстрация услуги", null=True, blank=True
+        upload_to="clinic", verbose_name="иллюстрация услуги", blank=True
     )
     med_spec = models.ForeignKey(
         "clinic.MedStaffModel",
