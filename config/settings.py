@@ -150,6 +150,7 @@ CACHES = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+print("CI_TEST:", os.environ.get('CI_TEST'))
 
 if os.environ.get("CI_TEST") == "true":
     DATABASES = {
