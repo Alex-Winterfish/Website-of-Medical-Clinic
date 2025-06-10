@@ -55,8 +55,6 @@ jobs:
 
       - name: Run tests
         run: python manage.py test
-        env:
-          CI_TEST: 'true'
   build:
     needs: test
     runs-on: ubuntu-latest

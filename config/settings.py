@@ -152,7 +152,7 @@ CACHES = {
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-if "test" in sys.argv:
+if os.environ.get("CI_TEST") == "true":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
