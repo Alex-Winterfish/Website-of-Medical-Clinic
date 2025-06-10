@@ -22,7 +22,9 @@
       <p class="fst-italic fs-5">Стоимость: {{ service.price }}</p>
 
   </div>
+    {% if user.is_authenticated and not in_group %}
     <div class="card-footer"><a href="/appointment/create/{{ service.id }}/" class="btn btn-success">Запись на процедуру</a></div>
+    {% endif %}
 </div>
 </div>
      {% endfor %}

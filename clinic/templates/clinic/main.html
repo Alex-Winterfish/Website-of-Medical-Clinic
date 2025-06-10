@@ -29,8 +29,10 @@
     {{ service.name }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Подробнее</a></li>
+                    <li><a class="dropdown-item" href="/services/detail/{{ service.id }}/">Подробнее</a></li>
+                    {% if user.is_authenticated and not in_group %}
                     <li><a class="dropdown-item" href="/appointment/create/{{ service.id }}/">Записаться</a></li>
+                    {% endif %}
                 </ul>
             </div>
             {% endfor %}
