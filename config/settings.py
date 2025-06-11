@@ -17,7 +17,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -149,8 +149,6 @@ CACHES = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
-
-print("CI_TEST:", os.environ.get('CI_TEST'))
 
 if os.environ.get("CI_TEST") == "true":
     DATABASES = {
