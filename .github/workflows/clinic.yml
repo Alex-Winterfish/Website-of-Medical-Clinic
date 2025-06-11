@@ -59,6 +59,7 @@ jobs:
         run: python manage.py test
         env:
           CI_TEST: 'true'
+          COMPANY_NAME: 'MedService'
   build:
     needs: test
     runs-on: ubuntu-latest
