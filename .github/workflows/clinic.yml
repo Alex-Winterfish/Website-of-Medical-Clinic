@@ -94,7 +94,6 @@ jobs:
       - name: Deploy to server via SSH
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          mkdir clinic || true
           cd clinic
           sudo docker compose down || true
           sudo docker compose up -d --pull always
