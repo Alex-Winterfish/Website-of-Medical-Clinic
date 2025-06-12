@@ -138,7 +138,7 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 LOGIN_URL = "login/"
 
-LOGIN_REDIRECT_URL = "/main/"
+LOGIN_REDIRECT_URL = "/main/main_page/"
 
 
 CACHES = {

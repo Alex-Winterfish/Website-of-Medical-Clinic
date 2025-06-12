@@ -22,6 +22,11 @@ class StaffListView(generic.ListView):
         return context
 
 
+class StaffDetailView(generic.DetailView):
+    """Контроллер для получения сущности models: clinic.model.MedStaffModel."""
+    template_name = 'clinic/med_spec.html'
+    model = models.MedStaffModel
+
 '''
 class StaffCreateView(generic.CreateView):
     """Контроллер для cсоздания сощности models: clinic.model.MedStaffModel."""
@@ -35,10 +40,7 @@ class StaffUpdateView(generic.UpdateView):
     model = models.MedStaffModel
 
 
-class StaffDetailView(generic.DetailView):
-    """Контроллер для получения сущности models: clinic.model.MedStaffModel."""
 
-    model = models.MedStaffModel
 
 
 class StaffDeleteView(generic.DeleteView):

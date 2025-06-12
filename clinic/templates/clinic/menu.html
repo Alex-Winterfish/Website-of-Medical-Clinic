@@ -44,9 +44,9 @@
                 <a href="/main/main_page/" type="button" class="btn btn-success mt-1">Главная</a>
                 <a href='/staff/list/' type="button" class="btn btn-success mt-1">О компании</a>
                 <a href="/services/list/" type="button" class="btn btn-success mt-1">Услуги</a>
-                <a href="/contacts/" type="button" class="btn btn-success mt-1">Контакты</a>
+                <a href="/main/contacts/" type="button" class="btn btn-success mt-1">Контакты</a>
                 {% if user.is_authenticated and not in_group %}
-                <a href="/user_page/" type="button" class="btn btn-success mt-1">Личный кабинет</a>
+                <a href="/users/user_page/" type="button" class="btn btn-success mt-1">Личный кабинет</a>
                 {% endif %}
                 {% if in_group %}
                 <a href="/results/list/" type="button" class="btn btn-success mt-1">Модерация</a>

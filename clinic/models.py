@@ -48,6 +48,9 @@ class MedStaffModel(models.Model):
         verbose_name="специальность",
         blank=True,
     )
+
+    education = models.TextField(verbose_name='образование', blank=True)
+
     photo = models.ImageField(
         upload_to="clinic", verbose_name="фото специалиста", blank=True
     )
