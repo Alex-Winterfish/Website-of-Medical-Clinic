@@ -6,7 +6,11 @@ app_name = ClinicConfig.name
 
 urlpatterns = [
     path("list/", staff_views.StaffListView.as_view(), name="med_personal"),
-    path("detail/<int:pk>/", staff_views.StaffDetailView.as_view(), name="detail_med_staff"),
+    path(
+        "detail/<int:pk>/",
+        staff_views.StaffDetailView.as_view(),
+        name="detail_med_staff",
+    ),
 ]
 """
 path("create/", staff_views.StaffCreateView.as_view(), name="create_med_staff"),
