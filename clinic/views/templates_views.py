@@ -13,7 +13,7 @@ load_dotenv()
 class MainPageView(generic.TemplateView):
     """Контроллер для отображения главной страницы."""
 
-    template_name = "clinic/main.html"
+    template_name = "clinic/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
