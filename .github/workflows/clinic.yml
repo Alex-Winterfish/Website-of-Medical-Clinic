@@ -1,6 +1,6 @@
 name: MedClinic CI
 
-on: [push, pull_request]
+on: [push]
 
 env:
   SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
