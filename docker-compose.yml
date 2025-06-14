@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres
+    env_file:
+      - .env
+    expose:
+      - '5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $POSTGRES_USER']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      app_network:
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  clinic:
+    image: alexwinterfish/clinic
+    command: >
+      sh -c './wait-for-it.sh db:5432 --timeout=60 --strict && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py add_staff && python manage.py add_services&& python manage.py runserver 0.0.0.0:8000'
+    volumes:
+      - staticfiles:/clinic/staticfiles
+      - static_volume:/clinic/static
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    networks:
+      app_network:
+    env_file:
+      - .env
+  nginx:
+    image: alexwinterfish/nginx-clinic:latest
+    ports:
+      - '80:80'
+    depends_on:
+      - clinic
+    volumes:
+      - staticfiles:/clinic/staticfiles
+      - static_volume:/clinic/static
+    networks:
+      app_network:
+networks:
+  app_network:
+    driver: bridge
+volumes:
+  postgres_data:
+  static_volume:
+  clinic:
+  nginx:

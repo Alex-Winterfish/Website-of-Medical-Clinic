@@ -1,0 +1,60 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}О нашей компании{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+<div class="container d-flex flex-column bg-light px-4">
+<div class="row-md-4">
+
+
+    <div class="col p-3">
+    <div class="card">
+    <div class="card-header fst-italic fs-3 fw-bold">История комании</div>
+        <div class="card-body fst-italic fs-5 px-4">{{ company.history }}</div>
+    </div>
+
+
+
+</div>
+</div>
+</div>
+
+<div class="container d-flex flex-column bg-light px-4" >
+<div class="row-md-4">
+
+    <div class="col p-3">
+    <div class="card">
+    <div class="card-header fst-italic fs-3 fw-bold">Миссия и ценности</div>
+        <div class="card-body fst-italic fs-5 px-4">{{ company.values }}</div>
+    </div>
+
+</div>
+</div>
+
+<div class="container d-flex flex-column bg-light px-4">
+
+    <p class="fst-italic fs-3 fw-bold">Команда врачей</p>
+<div class="row g-3">
+            {% for staff in object_list %}
+<div class="col-12 col-md-4 col-lg-3 d-flex align-items-stretch px-4">
+<div class="card w-100" style="width: 18rem;">
+  <img src="{{ staff.photo.url }}" class="card-img-top" alt="..." >
+  <div class="card-body">
+    <h5 class="card-title">{{ staff.name }}</h5>
+    <p class="card-text">{{ staff.speciality }}</p>
+    <a href="/staff/detail/{{ staff.id }}/" class="btn btn-success">Подробнее о специалисте</a>
+  </div>
+</div>
+</div>
+     {% endfor %}
+</div>
+
+
+
+</div>
+
+
+
+{% endblock %}
