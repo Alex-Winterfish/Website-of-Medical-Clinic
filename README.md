@@ -179,6 +179,7 @@ MedStaffModel и MedServiceModel.
 coverage report
 ```
 Покрытие тестами 87
+```
 Name                                     Stmts   Miss  Cover
 ------------------------------------------------------------
 clinic\__init__.py                           0      0   100%
@@ -229,3 +230,4 @@ users\validators.py                          6      3    50%
 users\views.py                              42     14    67%
 ------------------------------------------------------------
 TOTAL                                      605     79    87%
+```
