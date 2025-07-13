@@ -1,0 +1,32 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}Компания медицинской диагностики{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+<div class="container d-flex flex-column bg-light" >
+
+    <div class="row">
+
+        <div class="col col-md-4 col-lg-6 p-3">
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title fst-italic fs-5">{{ object.name }}</h5>
+    </div>
+  <img src="{{ object.photo.url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+
+    <p class="card-text fst-italic fs-5">{{ object.description }}</p>
+      <p class="fst-italic fs-5">Стоимость: {{ object.price }}</p>
+
+  </div>
+    {% if user.is_authenticated and not in_group %}
+    <div class="card-footer"><a href="/appointment/create/{{ object.id }}/" class="btn btn-success">Запись на процедуру</a></div>
+    {% endif %}
+</div>
+
+        </div></div>
+</div>
+
+{% endblock %}

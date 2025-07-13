@@ -1,0 +1,60 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}О нашей компании{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+
+<div class="container d-flex flex-column bg-light p-3">
+
+    <div class="row bg-light">
+
+            <div class="col col-md-4 col-lg-4 p-3">
+                <div class="card">
+  <div class="card-header">
+      <p class="fst-italic fs-3 fw-bold">Контактная информация</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item fst-italic fs-5"><p>Электронная почта:</p><p>{{ company.email }}</p></li>
+    <li class="list-group-item fst-italic fs-5"><p>Телефон:</p><p>{{ company.phone }}</p></li>
+      <li class="list-group-item fst-italic fs-5"><p>Адрес:</p><p>{{ company.address }}</p></li>
+  </ul>
+</div>
+            </div>
+
+
+<div class="col col-md-4 col-lg-4 p-3">
+
+    <div class="card">
+        <div class="card-header">
+            <p class="fst-italic fs-3 fw-bold">
+            Форма для связи с нами
+            </p></div>
+    <div class="card-body">
+        <form method="post" action="" class="form-floating fst-italic fs-5">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-lg btn-block btn-success">Отправить</button>
+    </div></form>
+    </div></div>
+
+
+
+
+</div>
+<div class="col col-md-4 col-lg-4 p-3">
+<div class="card" style="width: 20rem;">
+    <div class="card-header fst-italic fs-3 fw-bold">Карта проезда</div>
+    <div style="width: 100%; height: 400px;">
+  <iframe src="{{ company.map_address }}" width="100%" height="400" frameborder="0"></iframe>
+  <div class="card-body">
+</div>
+        </div>
+        </div>
+        </div>
+
+                    </div></div>
+
+{% endblock %}

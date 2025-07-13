@@ -1,0 +1,78 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}Компания медицинской диагностики{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+<div class="container d-flex flex-column bg-light" >
+
+    <div class="row">
+
+        <div class="col col-md-4 col-lg-6 p-3">
+    <div class="card">
+        <div class="card-header">
+            <p class="fst-italic fs-3 fw-bold">О компании</p></div>
+        <div class="card-body"><p class="fst-italic p-3">{{ company.about }}</p></div>
+    </div>
+        </div>
+
+        <div class="col col-md-4 col-lg-6 p-3">
+
+                <div class="card">
+        <div class="card-header"><p class="fst-italic fs-3 fw-bold">Предоставляемые услуги</p></div>
+        <div class="card-body">
+
+    {% for service in med_services %}
+
+            <p><div class="btn-group mt-3">
+                <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ service.name }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="/services/detail/{{ service.id }}/">Подробнее</a></li>
+                    {% if user.is_authenticated and not in_group %}
+                    <li><a class="dropdown-item" href="/appointment/create/{{ service.id }}/">Записаться</a></li>
+                    {% endif %}
+                </ul>
+            </div></p>
+            {% endfor %}
+        </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container d-flex flex-column bg-light">
+<div class="row">
+<div class="col col-md-4 col-lg-6 p-3">
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            <p class="fst-italic fs-3 fw-bold">Форма обратной связи</p></div>
+        <div class="card-body">
+            <a href='/users/feedback/' type='button' class="btn btn-success mt-3">Написать нам</a>
+        </div>
+    </div>
+</div>
+
+    <div class="col col-md-4 col-lg-6 p-3">
+<div class="card">
+  <div class="card-header">
+      <p class="fst-italic fs-3 fw-bold">Контактная информация</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item fst-italic fs-5"><p>Электронная почта:</p><p>{{ company.email }}</p></li>
+    <li class="list-group-item fst-italic fs-5"><p>Телефон:</p><p>{{ company.phone }}</p></li>
+      <li class="list-group-item fst-italic fs-5"><p>Адрес:</p><p>{{ company.address }}</p></li>
+  </ul>
+</div>
+    </div></div>
+
+
+</div>
+
+
+
+{% endblock %}

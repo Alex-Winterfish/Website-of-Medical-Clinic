@@ -1,0 +1,23 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}Страничка модератора{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+<div class="container">
+
+    <div class="row p-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <p class="fst-italic fs-5">Результат процедуры успешно сохранен!</p>
+                    <a href="/results/create/" class="btn btn-success mt-3">Продолжить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}О нашей компании{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+
+
+    <div class="col-6 p-5">
+    <div class="card">
+
+        <div class="card-header">{{ object.appointment.med_serv.name }}</div>
+        <div class="card-body">
+        <p class="fst-italic">{{ object.result }}</p></div>
+            <div class="card-footer">Процедура выполнена: {{ object.appointment.med_serv.med_spec }}</div>
+
+</div>
+    </div>
+
+
+
+
+{% endblock %}

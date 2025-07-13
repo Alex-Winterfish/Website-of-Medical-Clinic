@@ -1,0 +1,66 @@
+{% extends 'clinic/base.html' %}
+
+{% block title %}Страничка модератора{% endblock %}
+
+{% block content %}
+{% include 'clinic/menu.html' %}
+
+<div class="container d-flex flex-column bg-light px-4">
+<div class="row">
+
+    <div class="col col-md-4 col-lg-6 p-3">
+
+        <div class="card">
+            <div class="card-header fst-italic fs-3 fw-bold">Результаты процедур для оформления</div>
+            <div class="card-body">
+
+                {% if app_false %}
+
+                <p class="fst-italic fs-5">Нет процедур для оформления</p>
+
+                {% else %}
+<ul class="list-group">
+                {% for app in appointment %}
+    <li class="list-group-item fst-italic fs-5">{{ app.med_serv }}
+        <p>Пациент: {{ app.patient.last_name }} {{ app.patient.first_name | slice:1 }}. {{ app.patient.patronymic | slice:1 }}.</p>
+        
+        <p><a href="/results/create/{{ app.id }}/" class="btn btn-lg btn-block btn-success">Оформить</a></p></li>
+
+                {% endfor %}
+      </ul>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+
+        <div class="col col-md-4 col-lg-6 p-3">
+
+        <div class="card">
+            <div class="card-header fst-italic fs-3 fw-bold">Оформленные результаты</div>
+            <div class="card-body">
+                {% if app_done_false %}
+
+                <p class="fst-italic fs-5">Нет оформленных процедур</p>
+
+                {% else %}
+                <ul class="list-group">
+                {% for app in appointment_done %}
+  <li class="list-group-item fst-italic fs-5">{{ app.med_serv.name }}. Пациент: {{ app.patient.last_name }} {{ app.patient.first_name | slice:1 }}. {{ app.patient.patronymic | slice:1 }}.</li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+</div>
+</div>
+
+
+{% endblock %}

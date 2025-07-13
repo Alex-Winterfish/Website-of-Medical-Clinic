@@ -1,97 +1,140 @@
+# -*- coding: UTF-8 -*-
 from django.db import models
 
+
 class MedStaffModel(models.Model):
-    '''Модель медицинского специалиста model:clinic.model.MedStaffModel.'''
+    """Модель медицинского специалиста model:clinic.model.MedStaffModel."""
 
-    MD = 'Врач'
-    NURSE = 'Медсестра'
+    MD = "Врач"
+    NURSE = "Медсестра"
 
-    TITLE_IN_CHOICES = [
-        (MD, 'Врач'),
-        (NURSE, 'Медсестра')
-    ]
+    TITLE_IN_CHOICES = [(MD, "Врач"), (NURSE, "Медсестра")]
 
-    GYNECOLOGIST = 'гинеколог'
-    CARDIOLOGIST = 'кардиолог'
-    NEUROSURGEON = 'нейрохирург'
-    NEUROLOGIST = 'невролог'
-    ENDOCRINOLOGIST = 'эндокринолог'
-    THERAPIST = 'терапевт'
-    ONCOLOGIST = 'онколог'
-    RHEUMATOLOGIST = 'ревматолог'
-    PHLEBOLOGIST = 'флеболог'
-    MAMMOLOG = 'мамолог'
-    RADIOLOGIST = 'рентгенолог'
+    GYNECOLOGIST = "гинеколог"
+    CARDIOLOGIST = "кардиолог"
+    NEUROSURGEON = "нейрохирург"
+    NEUROLOGIST = "невролог"
+    ENDOCRINOLOGIST = "эндокринолог"
+    THERAPIST = "терапевт"
+    ONCOLOGIST = "онколог"
+    RHEUMATOLOGIST = "ревматолог"
+    PHLEBOLOGIST = "флеболог"
+    MAMMOLOG = "мамолог"
+    RADIOLOGIST = "рентгенолог"
 
     SPECIALITY_IN_CHOICES = [
-        (GYNECOLOGIST, 'гинеколог'),
-        (CARDIOLOGIST, 'кардиолог'),
-        (NEUROSURGEON, 'нейрохирург'),
-        (NEUROLOGIST, 'невролог'),
-        (ENDOCRINOLOGIST, 'эндокринолог'),
-        (THERAPIST, 'терапевт'),
-        (ONCOLOGIST, 'онколог'),
-        (RHEUMATOLOGIST, 'ревматолог'),
-        (PHLEBOLOGIST, 'флеболог'),
-        (MAMMOLOG, 'мамолог'),
-        (RADIOLOGIST, 'рентгенолог')
+        (GYNECOLOGIST, "гинеколог"),
+        (CARDIOLOGIST, "кардиолог"),
+        (NEUROSURGEON, "нейрохирург"),
+        (NEUROLOGIST, "невролог"),
+        (ENDOCRINOLOGIST, "эндокринолог"),
+        (THERAPIST, "терапевт"),
+        (ONCOLOGIST, "онколог"),
+        (RHEUMATOLOGIST, "ревматолог"),
+        (PHLEBOLOGIST, "флеболог"),
+        (MAMMOLOG, "мамолог"),
+        (RADIOLOGIST, "рентгенолог"),
     ]
 
-    name = models.CharField(max_length=1000, verbose_name='Ф.И.О медицинского специалиста.')
-    title = models.CharField(choices=TITLE_IN_CHOICES, verbose_name='медицинская должность')
-    speciality = models.CharField(choices=SPECIALITY_IN_CHOICES, verbose_name='специальность')
+    name = models.CharField(
+        max_length=1000, verbose_name="Ф.И.О медицинского специалиста."
+    )
+    title = models.CharField(
+        max_length=20, choices=TITLE_IN_CHOICES, verbose_name="медицинская должность"
+    )
+    speciality = models.CharField(
+        max_length=20,
+        choices=SPECIALITY_IN_CHOICES,
+        verbose_name="специальность",
+        blank=True,
+    )
+
+    education = models.TextField(verbose_name="образование", blank=True)
+
+    photo = models.ImageField(
+        upload_to="clinic", verbose_name="фото специалиста", blank=True
+    )
 
     def __str__(self):
         if self.title == self.MD:
-            return f'{self.name}: {self.title}-{self.speciality}.'
+            return f"{self.name}: {self.title}-{self.speciality}."
         else:
-            return f'{self.name}: {self.title}.'
+            return f"{self.name}: {self.title}."
 
     class Meta:
-        verbose_name = 'Медицинский работник'
-        verbose_name_plural = 'Медицинские работники'
+        verbose_name = "Медицинский работник"
+        verbose_name_plural = "Медицинские работники"
+
 
 class MedServiceModel(models.Model):
-    '''Модель медицинской услуги model:clinic.models.MedServiceModel.'''
+    """Модель медицинской услуги model:clinic.models.MedServiceModel."""
 
-    name = models.CharField(max_length=1000, verbose_name='название медицинской услуги')
-    description = models.CharField(max_length=2000, verbose_name='описание медицинской услуги')
+    name = models.CharField(max_length=1000, verbose_name="название медицинской услуги")
+    description = models.CharField(
+        max_length=2000, verbose_name="описание медицинской услуги"
+    )
+    price = models.PositiveSmallIntegerField(default=100, verbose_name="стоимость")
+    photo = models.ImageField(
+        upload_to="clinic", verbose_name="иллюстрация услуги", blank=True
+    )
+    med_spec = models.ForeignKey(
+        "clinic.MedStaffModel",
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="назначенный медицинский специалист",
+    )
 
     def __str__(self):
-        return f'Медицинская услуга: {self.name}.'
+        return f"Медицинская услуга: {self.name}."
 
     class Meta:
-        verbose_name = 'Медицинская услуга'
-        verbose_name_plural = 'Медицинские услуги'
+        verbose_name = "Медицинская услуга"
+        verbose_name_plural = "Медицинские услуги"
+
 
 class AppointmentModel(models.Model):
-    '''Модель запись на медицинскую услугу model:clinic.models.AppointmentModel.'''
+    """Модель запись на медицинскую услугу model:clinic.models.AppointmentModel."""
 
-    ap_date = models.DateTimeField(verbose_name='дата и время оказания медицинской услуги.')
-    med_spec = models.ForeignKey('clinic.MedStaffModel', on_delete=models.SET_NULL, verbose_name='назначенный медицинский специалист')
-    med_serv = models.ForeignKey('clinic.MedServiceModel', on_delete=models.CASCADE, verbose_name='медицинская услуга')
-    patient = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='пациент')
+    ap_date = models.DateField(verbose_name="дата записи.")
+    ap_time = models.TimeField(verbose_name="врямя записи.")
+
+    med_serv = models.ForeignKey(
+        "clinic.MedServiceModel",
+        on_delete=models.CASCADE,
+        verbose_name="медицинская услуга",
+    )
+    patient = models.ForeignKey(
+        "users.CustomUser", on_delete=models.CASCADE, verbose_name="пациент"
+    )
 
     def __str__(self):
-        return f'Запись на {self.med_serv.name}. Дата: {self.ap_date}.'
+        return f"Запись на {self.med_serv.name}. Дата: {self.ap_date}."
 
     class Meta:
-        verbose_name = 'запись'
-        verbose_name_plural = 'записи'
+        verbose_name = "запись"
+        verbose_name_plural = "записи"
 
 
 class ResultModel(models.Model):
-    '''Модель результат диагностики model:clinic.models.ResultModel.'''
-    result_date = models.DateField(verbose_name='дата результата медуслуги')
-    appointment = models.ForeignKey('clinic.AppointmentModel', on_delete=models.SET_NULL)
-    result = models.TextField(max_length=5000, verbose_name='эпикриз по результатам медицинской процедуры')
+    """Модель результат диагностики model:clinic.models.ResultModel."""
+
+    result_date = models.DateField(verbose_name="дата результата медуслуги")
+    appointment = models.ForeignKey(
+        "clinic.AppointmentModel",
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="назнечение на процедуру",
+    )
+    result = models.TextField(
+        max_length=5000, verbose_name="эпикриз по результатам медицинской процедуры"
+    )
+    patient = models.ForeignKey(
+        "users.CustomUser", on_delete=models.CASCADE, verbose_name="пациент"
+    )
 
     def __str__(self):
-        return f'Результаты процедуры от {self.result_date}.'
+        return f"Результаты процедуры от {self.result_date}."
 
     class Meta:
-        verbose_name = 'результат'
-        verbose_name_plural = 'результаты'
-
-
-
+        verbose_name = "результат"
+        verbose_name_plural = "результаты"
